@@ -1,3 +1,9 @@
+<%-- 
+    Document   : mur
+    Created on : 12 févr. 2019, 15:00:00
+    Author     : jérémy
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,22 +24,25 @@
 
     <body>
         <jsp:include page="navbar.jsp" >
-            <jsp:param name="page" value="0" />
+            <jsp:param name="page" value="1" />
           </jsp:include>
-        <div class="container-fluid">
-              
-            <form method="POST" ACTION="connexion.htm" class="container">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="login">
+            <div class="container_fluid">
+                <div class="row">
+                  <div class="col-sm-1" width="35%">
+                      <!-- Identite du proprietaire du mur -->
+                      <div>Nom : ${pseudo}</div>
+                  </div>
+                  <div class="col-sm-2" >
+                      <!-- le mur -->
+                        <div>
+                            <p>
+                               Publication de truc
+                            </p>
+                        </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Mot de passe</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-        </div>
+              </div>
         
     </body>
 </html>
+
