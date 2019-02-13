@@ -24,13 +24,13 @@
         <jsp:include page="navbar.jsp" >
             <jsp:param name="page" value="1" />
           </jsp:include>
-            <div class="container_fluid">
+            <div class="container">
                 <div class="row">
-                  <div class="col-sm-1" width="35%">
+                  <div class="col-sm-3">
                       <!-- Identite du proprietaire du mur -->
                       <div>Nom : ${pseudo}</div>
                   </div>
-                  <div class="col-sm-2" >
+                  <div class="col-sm-9" >
                       <!-- le mur -->
                       <div class="card-group">
                           <jsp:include page="publication.jsp">                         
