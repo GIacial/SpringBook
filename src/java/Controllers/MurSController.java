@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MurSController {
     
-    @RequestMapping (value="mur" , method = RequestMethod.GET)
-    public ModelAndView handleRequestInternal (HttpServletRequest request , HttpServletResponse responce) throws Exception{
+    @RequestMapping (value="amimur" , method = RequestMethod.GET)
+    public ModelAndView handleRequestInternal (HttpServletRequest request , HttpServletResponse responce , @RequestParam String pseudo) throws Exception{
         String result = "Erreur d'identification";    
         ModelAndView mv = null;      
         HttpSession session = request.getSession (true);
@@ -31,12 +32,18 @@ public class MurSController {
         if(session.getAttribute("login") != null){
             //ModelVue
             mv = new ModelAndView("mur");
-            mv.addObject("pseudo", "pseudo");
+            mv.addObject("pseudo", pseudo);
         }
         else{
             mv = new ModelAndView("index");
             mv.addObject("alert", result);
         }
         return mv;
+    }
+    
+    @RequestMapping (value="mur" , method = RequestMethod.GET)
+    public ModelAndView handleRequestInternal (HttpServletRequest request , HttpServletResponse responce ) throws Exception{
+        
+        return this.handleRequestInternal(request, responce,"pseudo");
     }
 }

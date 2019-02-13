@@ -33,7 +33,7 @@ public class ConnexionSController {
     }
     
     @RequestMapping(value="connexion" , method = RequestMethod.POST)
-    public ModelAndView handleRequestInternal (HttpServletRequest request , HttpServletResponse responce) throws Exception{
+    public ModelAndView connexion (HttpServletRequest request , HttpServletResponse responce) throws Exception{
         String result = "Erreur d'identification";    
         ModelAndView mv = null;
         String login = request.getParameter("login");
@@ -57,4 +57,15 @@ public class ConnexionSController {
         }
         return mv;
     }
+    
+    @RequestMapping(value="deconnexion" , method = RequestMethod.GET)
+    public ModelAndView deconnexion (HttpServletRequest request , HttpServletResponse responce) throws Exception{
+               
+        HttpSession session = request.getSession (true);
+        //on vide la session
+        session.setAttribute("login" , null);
+        return new ModelAndView("index");
+    }
+    
+    
 }

@@ -9,7 +9,7 @@
 
 <nav class="navbar  navbar-light" style="background-color: #33cc33;">
         <a class="navbar-brand" href="mur.htm">SpringBook</a>
-        <c:if test="${param.page > 0}">
+        <c:if test="${param.page != 0}">
             <a class="navbar-brand" href="deconnexion.htm">Déconnexion</a>
          </c:if>
         
