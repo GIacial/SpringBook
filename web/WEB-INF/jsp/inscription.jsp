@@ -1,7 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<%-- 
+    Document   : inscription
+    Created on : 13 févr. 2019, 11:50:11
+    Author     : jérémy
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,10 +21,12 @@
 
     <body>
         <jsp:include page="navbar.jsp" >
-            <jsp:param name="page" value="0" />
+            <jsp:param name="page" value="-1" />
           </jsp:include>
         <div class="container-fluid">
-            <form method="POST" ACTION="connexion.htm" class="container">
+              
+            <h1 class="text-center">Inscription</h1>
+            <form method="POST" ACTION="inscription.htm" class="container">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="login">
@@ -29,9 +35,12 @@
                   <label for="exampleInputPassword1">Mot de passe</label>
                   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                 </div>
+                <div class="form-group">
+                  <label for="inputPseudo">Pseudo</label>
+                  <input type="text" class="form-control" id="inputPseudo"  placeholder="Pseudo" name="pseudo">
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
-            <a class="navbar-brand" href="inscription.htm">Pas encore inscrit ?</a>
         </div>
         
     </body>

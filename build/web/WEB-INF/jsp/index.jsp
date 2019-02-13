@@ -20,7 +20,6 @@
             <jsp:param name="page" value="0" />
           </jsp:include>
         <div class="container-fluid">
-              
             <form method="POST" ACTION="connexion.htm" class="container">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
@@ -32,6 +31,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
+            <a class="navbar-brand" href="inscription.htm">Pas encore inscrit ?</a>
         </div>
         
     </body>
