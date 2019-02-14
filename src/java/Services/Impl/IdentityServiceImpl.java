@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class IdentityServiceImpl implements IdentityService {
 
+    @Override
     public String getPseudo(String adresseMail) {
         String[] tab = adresseMail.split("@");
         return tab[0];

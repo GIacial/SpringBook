@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class IdentificationServiceImpl implements IdentificationService{
 
+    @Override
     public boolean isCorrectIdentifier(String email, String mdp) {
         return (!email.equals("")) && (!mdp.equals(""));
     }

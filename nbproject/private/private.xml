@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/WEB-INF/jsp/navbar.jsp</file>
-            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/WEB-INF/jsp/mur.jsp</file>
-            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/src/java/Controllers/MurSController.java</file>
-            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/src/java/Controllers/ConnexionSController.java</file>
-            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/WEB-INF/jsp/alert.jsp</file>
-            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/src/java/Database/Dao/Impl/AuthentificationDAOImpl.java</file>
+            <file>file:/C:/Users/jérémy/Documents/NetBeansProjects/SpringBook/src/java/Database/Entity/AuthentificationEntity.java</file>
         </group>
     </open-files>
 </project-private>
