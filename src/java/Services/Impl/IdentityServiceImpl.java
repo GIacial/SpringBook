@@ -6,7 +6,11 @@
 
 package Services.Impl;
 
+import Database.Dao.IdentityDAO;
+import Database.Entity.IdentityEntity;
 import Services.IdentityService;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,11 +19,23 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class IdentityServiceImpl implements IdentityService {
+    
+    @Resource
+    private IdentityDAO identityR;
 
     @Override
-    public String getPseudo(String adresseMail) {
-        String[] tab = adresseMail.split("@");
-        return tab[0];
+    public IdentityEntity findIdentity(String adresseMail) {
+        List<IdentityEntity> identityList = identityR.findByEMail(adresseMail);
+        if(identityList.isEmpty()){
+            System.err.println("Pas d'identite pour "+ adresseMail);
+            return null;
+        }
+        return identityList.get(0);
+    }
+
+    @Override
+    public IdentityEntity findIdentity(long key) {
+        return identityR.find(key);
     }
     
 }

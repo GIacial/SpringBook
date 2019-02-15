@@ -6,6 +6,7 @@
 
 package Controllers;
 
+import Database.Entity.IdentityEntity;
 import Services.IdentityService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class MurSController {
     private IdentityService identityService;
     
     @RequestMapping (value="amimur" , method = RequestMethod.GET)
-    public ModelAndView handleRequestInternal (HttpServletRequest request , @RequestParam String pseudo) throws Exception{
+    public ModelAndView handleRequestInternal (HttpServletRequest request , @RequestParam long keyIdentity) throws Exception{
         String result = "Erreur d'identification";    
         ModelAndView mv = null;      
         HttpSession session = request.getSession (true);
@@ -37,7 +38,14 @@ public class MurSController {
         if(session.getAttribute("login") != null){
             //ModelVue
             mv = new ModelAndView("mur");
-            mv.addObject("pseudo", pseudo);
+            IdentityEntity identity = identityService.findIdentity(keyIdentity);
+            if(identity != null){        
+                mv.addObject("pseudo", identity.getPseudo());
+            }
+            else{
+                mv.addObject("pseudo", "Error");
+                mv.addObject("alert", "Identity not found");
+            }
         }
         else{
             mv = new ModelAndView("index");
@@ -48,11 +56,15 @@ public class MurSController {
     
     @RequestMapping (value="mur" , method = RequestMethod.GET)
     public ModelAndView handleRequestInternal (HttpServletRequest request  ) throws Exception{
-        String pseudo = "Error 5";
+        long pseudo = -1;
         HttpSession session = request.getSession (true);
         String currentLogin = (String)session.getAttribute("login");
         if( currentLogin!= null){
-            pseudo = identityService.getPseudo(currentLogin);
+            
+            IdentityEntity identity = identityService.findIdentity(currentLogin);
+            if(identity != null){           
+                pseudo = identity.getId();
+            }
         }
         return this.handleRequestInternal(request,pseudo);
     }

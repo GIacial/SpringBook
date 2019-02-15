@@ -6,15 +6,17 @@
 
 package Database.Dao;
 
-import Database.Entity.AuthentificationEntity;
 import java.util.List;
 
 /**
  *
  * @author jérémy
  */
-public interface AuthentificationDAO extends AbstractDAO<AuthentificationEntity> {
+public interface AbstractDAO <T> {
     
-    
-    public List<AuthentificationEntity> findByEMail(String email);
+    public T save(T h);
+    public void update(T h);
+    public void delete(T h);
+    public T find(long id);
+    public List<T> findAll();
 }

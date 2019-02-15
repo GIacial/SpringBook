@@ -7,7 +7,9 @@
 package Services.Impl;
 
 import Database.Dao.AuthentificationDAO;
+import Database.Dao.IdentityDAO;
 import Database.Entity.AuthentificationEntity;
+import Database.Entity.IdentityEntity;
 import Services.InscriptionService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,10 @@ import org.springframework.stereotype.Service;
 public class InscriptionServiceImpl implements InscriptionService {
     
     @Resource
-    private AuthentificationDAO authentification;
+    private AuthentificationDAO authentificationR;
+    
+    @Resource
+    private IdentityDAO identityR;
 
     @Override
     public boolean inscription(String email, String mdp, String pseudo) {
@@ -30,9 +35,13 @@ public class InscriptionServiceImpl implements InscriptionService {
         if(inscrit){
             //faire l'inscription
             AuthentificationEntity nouv = new AuthentificationEntity(email,mdp);
-            inscrit = this.authentification.findByEMail(email).isEmpty();
+            inscrit = this.authentificationR.findByEMail(email).isEmpty();
             if(inscrit){           
-                this.authentification.save(nouv);
+                nouv = this.authentificationR.save(nouv);       
+                IdentityEntity identity = new IdentityEntity(pseudo);
+                
+                identity.setAuthentification(nouv);
+                this.identityR.save(identity);
             }
         }
         return inscrit;

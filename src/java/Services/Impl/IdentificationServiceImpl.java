@@ -6,7 +6,11 @@
 
 package Services.Impl;
 
+import Database.Dao.AuthentificationDAO;
+import Database.Entity.AuthentificationEntity;
 import Services.IdentificationService;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,10 +19,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class IdentificationServiceImpl implements IdentificationService{
+    
+    @Resource
+    private AuthentificationDAO authentificationR;
 
     @Override
     public boolean isCorrectIdentifier(String email, String mdp) {
-        return (!email.equals("")) && (!mdp.equals(""));
+        List<AuthentificationEntity> list = authentificationR.findByEMail(email);
+        if(!list.isEmpty()){
+            AuthentificationEntity auth = list.get(0);
+            return mdp.equals(auth.getMdp());
+        }
+        return false;
     }
     
 }

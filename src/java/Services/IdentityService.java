@@ -6,12 +6,15 @@
 
 package Services;
 
+import Database.Entity.IdentityEntity;
+
 /**
  *
  * @author jérémy
  */
 public interface IdentityService {
     
-    public String getPseudo (String adresseMail);
+    public IdentityEntity findIdentity (String adresseMail);
+    public IdentityEntity findIdentity(long key);
     
 }
