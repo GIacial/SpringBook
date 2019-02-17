@@ -39,6 +39,7 @@
                       <c:if test="${not myPage}">
                           <form method="POST" ACTION="ajouterAmi.htm" class="container">
 
+                              <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Ajouter en Amis</button>
                           </form>
                       </c:if>
@@ -46,12 +47,13 @@
                       
                       <!-- button de publication sur le mur -->
                       <c:if test="${myPage || ami}">
-                          <form method="POST" ACTION="Publier.htm" class="container">
+                          <form method="POST" ACTION="publier.htm" class="container">
 
                                 <div class="form-group">
                                   <label for="exampleFormControlTextarea1">Publier sur le mur</label>
-                                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="msg"></textarea>
                                 </div>
+                              <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Publier</button>
                           </form>
                           

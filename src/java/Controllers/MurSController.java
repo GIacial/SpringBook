@@ -8,6 +8,7 @@ package Controllers;
 
 import Database.Entity.IdentityEntity;
 import Services.IdentityService;
+import Services.PublicationService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,9 @@ public class MurSController {
     @Autowired
     private IdentityService identityService;
     
+    @Autowired
+    private PublicationService publicationService;
+    
     @RequestMapping (value="amimur" , method = RequestMethod.GET)
     public ModelAndView handleRequestInternal (HttpServletRequest request , @RequestParam long keyIdentity) throws Exception{
         String result = "Erreur d'identification";    
@@ -44,6 +48,7 @@ public class MurSController {
                 mv.addObject("pseudo", identity.getPseudo());
                 mv.addObject("myPage", identityLogin.equals(identity));
                 mv.addObject("ami" , false);
+                mv.addObject("key",keyIdentity);
             }
             else{
                 mv.addObject("pseudo", "Error");
@@ -70,5 +75,35 @@ public class MurSController {
             }
         }
         return this.handleRequestInternal(request,pseudo);
+    }
+    
+    @RequestMapping (value="publier" , method = RequestMethod.POST)
+    public ModelAndView publier (HttpServletRequest request , HttpServletResponse responce ) throws Exception{
+        HttpSession session = request.getSession (true);
+        ModelAndView mv = new ModelAndView("index"); 
+        mv.addObject("alert", "Vous n'êtes pas connecté");
+        String currentLogin = (String)session.getAttribute("login");
+        if( currentLogin!= null){
+            
+            long key =  Integer.parseInt(request.getParameter("key"));
+            IdentityEntity identity = identityService.findIdentity(key);
+            IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
+            if(identity != null){           
+                //regarder si c'est le sien ou d'un ami
+                if(identity.equals(identityLogin)){//ma page ou celle d'un ami
+                    //on enregistre   
+                    this.publicationService.createPublication(request.getParameter("msg"), identityLogin);
+                    
+                    //puis retourne sur la page
+                    mv = this.handleRequestInternal(request, key);
+                    mv.addObject("alert","Publication ok");
+                }
+                else{
+                    mv = this.handleRequestInternal(request, key);
+                    mv.addObject("alert","Vous n'avez pas les droits pour faire ça");
+                }
+            }
+        }
+        return mv;
     }
 }
