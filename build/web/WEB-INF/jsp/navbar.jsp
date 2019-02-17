@@ -4,12 +4,14 @@
     Author     : jérémy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="alert.jsp" %>
 
 
 <nav class="navbar  navbar-light" style="background-color: #33cc33;">
         <a class="navbar-brand" href="mur.htm">SpringBook</a>
         <c:if test="${param.page > 0}">
+            <a class="navbar-brand" href="ami.htm">Amis</a>
             <a class="navbar-brand" href="deconnexion.htm">Déconnexion</a>
          </c:if>
         

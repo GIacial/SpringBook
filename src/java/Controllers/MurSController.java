@@ -33,14 +33,17 @@ public class MurSController {
         String result = "Erreur d'identification";    
         ModelAndView mv = null;      
         HttpSession session = request.getSession (true);
-        
+        String currentLogin = (String) session.getAttribute("login");
 
-        if(session.getAttribute("login") != null){
+        if(currentLogin != null){
             //ModelVue
             mv = new ModelAndView("mur");
             IdentityEntity identity = identityService.findIdentity(keyIdentity);
+            IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
             if(identity != null){        
                 mv.addObject("pseudo", identity.getPseudo());
+                mv.addObject("myPage", identityLogin.equals(identity));
+                mv.addObject("ami" , false);
             }
             else{
                 mv.addObject("pseudo", "Error");

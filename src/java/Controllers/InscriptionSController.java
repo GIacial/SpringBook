@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author jérémy
  */
 @Controller
-public class InscriptionController {
+public class InscriptionSController {
     
     @Autowired
     private InscriptionService inscriptionService;

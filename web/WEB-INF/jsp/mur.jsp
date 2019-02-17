@@ -4,6 +4,7 @@
     Author     : jérémy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,6 +26,7 @@
             <jsp:param name="page" value="1" />
           </jsp:include>
             <div class="container">
+                <h1 class="text-center">Mur de ${pseudo}</h1>
                 <div class="row">
                   <div class="col-sm-3">
                       <!-- Identite du proprietaire du mur -->
@@ -32,11 +34,36 @@
                   </div>
                   <div class="col-sm-9" >
                       <!-- le mur -->
-                      <div class="card-group">
-                          <jsp:include page="publication.jsp">                         
-                            <jsp:param name="pseudoAuteur" value="Huge" />
-                        </jsp:include>
-                      </div>
+                      
+                      <!-- button ajouter amis -->
+                      <c:if test="${not myPage}">
+                          <form method="POST" ACTION="ajouterAmi.htm" class="container">
+
+                            <button type="submit" class="btn btn-primary">Ajouter en Amis</button>
+                          </form>
+                      </c:if>
+                      
+                      
+                      <!-- button de publication sur le mur -->
+                      <c:if test="${myPage || ami}">
+                          <form method="POST" ACTION="Publier.htm" class="container">
+
+                                <div class="form-group">
+                                  <label for="exampleFormControlTextarea1">Publier sur le mur</label>
+                                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            <button type="submit" class="btn btn-primary">Publier</button>
+                          </form>
+                          
+                          <!-- publication -->
+                          <div class="card-group">
+                            <jsp:include page="publication.jsp">                         
+                              <jsp:param name="pseudoAuteur" value="Huge" />
+                          </jsp:include>
+                        </div>
+                      </c:if>
+                      
+                      
                       
                   </div>
                 </div>
