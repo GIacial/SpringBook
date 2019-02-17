@@ -49,6 +49,7 @@ public class MurSController {
                 mv.addObject("myPage", identityLogin.equals(identity));
                 mv.addObject("ami" , false);
                 mv.addObject("key",keyIdentity);
+                mv.addObject("publications",publicationService.getAllPublication(identity));
             }
             else{
                 mv.addObject("pseudo", "Error");
@@ -96,7 +97,6 @@ public class MurSController {
                     
                     //puis retourne sur la page
                     mv = this.handleRequestInternal(request, key);
-                    mv.addObject("alert","Publication ok");
                 }
                 else{
                     mv = this.handleRequestInternal(request, key);

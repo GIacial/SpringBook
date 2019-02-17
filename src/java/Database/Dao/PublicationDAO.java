@@ -6,7 +6,9 @@
 
 package Database.Dao;
 
+import Database.Entity.IdentityEntity;
 import Database.Entity.PublicationEntity;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,5 @@ import Database.Entity.PublicationEntity;
  */
 public interface PublicationDAO extends AbstractDAO<PublicationEntity> {
     
+    public List<PublicationEntity> getMyWall(IdentityEntity mur);
 }

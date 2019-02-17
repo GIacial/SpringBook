@@ -63,5 +63,13 @@ public class PublicationDAOImpl implements PublicationDAO {
         Query q = em.createQuery("SELECT h FROM PublicationEntity h");
         return q.getResultList();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PublicationEntity> getMyWall(IdentityEntity mur) {
+        
+        Query q = em.createQuery("SELECT p  FROM PublicationEntity p join p.auteur i WHERE i.id = :idMur").setParameter("idMur",mur.getId());
+        return q.getResultList();
+    }
     
 }

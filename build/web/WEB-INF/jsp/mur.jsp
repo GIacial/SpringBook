@@ -58,10 +58,17 @@
                           </form>
                           
                           <!-- publication -->
-                          <div class="card-group">
+                          <div class="card-columns">
+                          <c:forEach items="${publications}" var="pub">
                             <jsp:include page="publication.jsp">                         
-                              <jsp:param name="pseudoAuteur" value="Huge" />
+                              <jsp:param name="pseudoAuteur" value="${pub.getAuteur().getPseudo()}" />  
+                              <jsp:param name="id" value="${pub.auteur}" />            
+                              <jsp:param name="create" value="${pub.creation}" />             
+                              <jsp:param name="msg" value="${pub.message}" />
                           </jsp:include>
+                        </c:forEach>
+                                </div>
+                          
                         </div>
                       </c:if>
                       

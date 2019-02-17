@@ -10,9 +10,11 @@
 
 <div class="card  border-primary bg-light mb-3" >
   <div class="card-header">Publication de 
-            <a  href="amimur.htm?pseudo=${param.pseudoAuteur}">${param.pseudoAuteur}</a></div>
+            <a  href="amimur.htm?pseudo=${param.id}">${param.pseudoAuteur}</a>
+            à ${param.create}
+            </div>
   <div class="card-body ">
-    <p class="card-text">Contenu de la publication</p>
+    <p class="card-text">${param.msg}</p>
   </div>
 </div>
 

@@ -33,7 +33,7 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public List<PublicationEntity> getAllPublication(IdentityEntity mur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.publications.getMyWall(mur);
     }
     
 }
