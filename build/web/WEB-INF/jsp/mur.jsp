@@ -47,18 +47,25 @@
                       
                       <!-- button de publication sur le mur -->
                       <c:if test="${myPage || ami}">
-                          <form method="POST" ACTION="publier.htm" class="container">
+                          <div class="card  border-primary bg-light mb-3" >
+                            <div class="card-header">Publier sur le mur
+                                      </div>
+                            <div class="card-body ">
+                                <form method="POST" ACTION="publier.htm" class="container">
 
                                 <div class="form-group">
-                                  <label for="exampleFormControlTextarea1">Publier sur le mur</label>
+                                  
                                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="msg"></textarea>
                                 </div>
                               <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Publier</button>
                           </form>
+                            </div>
+                          </div>
+                          
                           
                           <!-- publication -->
-                          <div class="card-columns">
+                         <!-- <div class="card-columns">-->
                           <c:forEach items="${publications}" var="pub">
                             <jsp:include page="publication.jsp">                         
                               <jsp:param name="pseudoAuteur" value="${pub.getAuteur().getPseudo()}" />  
@@ -67,7 +74,7 @@
                               <jsp:param name="msg" value="${pub.message}" />
                           </jsp:include>
                         </c:forEach>
-                                </div>
+                       <!--         </div>-->
                           
                         </div>
                       </c:if>

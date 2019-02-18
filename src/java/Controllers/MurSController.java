@@ -7,8 +7,11 @@
 package Controllers;
 
 import Database.Entity.IdentityEntity;
+import Database.Entity.PublicationEntity;
 import Services.IdentityService;
 import Services.PublicationService;
+import java.util.Collections;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,7 +52,9 @@ public class MurSController {
                 mv.addObject("myPage", identityLogin.equals(identity));
                 mv.addObject("ami" , false);
                 mv.addObject("key",keyIdentity);
-                mv.addObject("publications",publicationService.getAllPublication(identity));
+                List<PublicationEntity> pubs = publicationService.getAllPublication(identity);
+                Collections.reverse( pubs);
+                mv.addObject("publications", pubs);
             }
             else{
                 mv.addObject("pseudo", "Error");
