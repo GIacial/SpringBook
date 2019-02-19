@@ -36,8 +36,8 @@
                       <!-- le mur -->
                       
                       <!-- button ajouter amis -->
-                      <c:if test="${not myPage}">
-                          <form method="POST" ACTION="ajouterAmi.htm" class="container">
+                      <c:if test="${not myPage && not ami}">
+                          <form method="POST" ACTION="addami.htm" class="container">
 
                               <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Ajouter en Amis</button>
@@ -69,7 +69,7 @@
                           <c:forEach items="${publications}" var="pub">
                             <jsp:include page="publication.jsp">                         
                               <jsp:param name="pseudoAuteur" value="${pub.getAuteur().getPseudo()}" />  
-                              <jsp:param name="id" value="${pub.auteur}" />            
+                              <jsp:param name="id" value="${pub.auteur.getId()}" />            
                               <jsp:param name="create" value="${pub.creation}" />             
                               <jsp:param name="msg" value="${pub.message}" />
                           </jsp:include>

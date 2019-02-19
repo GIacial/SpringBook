@@ -35,19 +35,24 @@ public class PublicationEntity implements Serializable {
     @OneToOne
     private IdentityEntity auteur;
     
+    
+    @OneToOne
+    private IdentityEntity mur;
+    
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date creation;
     
     //constructeur
-    public PublicationEntity(String message, IdentityEntity auteur) {
+    public PublicationEntity(String message, IdentityEntity auteur, IdentityEntity mur) {
         this.message = message;
         this.auteur = auteur;
+        this.mur = mur;
         this.creation = new Date();
     }
     
     public PublicationEntity() {
-        this("",null);
+        this("",null,null);
     }
     
     
@@ -83,6 +88,14 @@ public class PublicationEntity implements Serializable {
 
     public void setCreation(Date creation) {
         this.creation = creation;
+    }
+
+    public IdentityEntity getMur() {
+        return mur;
+    }
+
+    public void setMur(IdentityEntity mur) {
+        this.mur = mur;
     }
     
     

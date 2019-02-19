@@ -5,6 +5,7 @@
     <class>Database.Entity.AuthentificationEntity</class>
     <class>Database.Entity.IdentityEntity</class>
     <class>Database.Entity.PublicationEntity</class>
+    <class>Database.Entity.AmitieEntity</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/SpringBook"/>

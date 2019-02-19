@@ -24,6 +24,24 @@
           </jsp:include>
         <div class="container-fluid">
             
+            <h1 class="text-center">Mes amis</h1>
+                <c:forEach items="${amis}" var="pub">
+                    <jsp:include page="ami.jsp">                         
+                      <jsp:param name="pseudo" value="${pub.getPseudo()}" />  
+                      <jsp:param name="id" value="${pub.getId()}" />            
+                      <jsp:param name="ami" value="true" />  
+                  </jsp:include>
+                </c:forEach>
+            
+            <h1 class="text-center">D'autres personnes</h1>
+                <c:forEach items="${autres}" var="pub">
+                    <jsp:include page="ami.jsp">                         
+                      <jsp:param name="pseudo" value="${pub.getPseudo()}" />  
+                      <jsp:param name="id" value="${pub.getId()}" />            
+                      <jsp:param name="ami" value="false" />  
+                  </jsp:include>
+                </c:forEach>
+            
         </div>
         
     </body>

@@ -6,9 +6,9 @@
 
 package Database.Dao.Impl;
 
-import Database.Dao.PublicationDAO;
+import Database.Dao.AmitieDAO;
+import Database.Entity.AmitieEntity;
 import Database.Entity.IdentityEntity;
-import Database.Entity.PublicationEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,10 +16,11 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Repository
-public class PublicationDAOImpl implements PublicationDAO {
+public class AmitieDAOImpl implements AmitieDAO {
     
-@PersistenceContext(unitName="SpringBookPU")
+    @PersistenceContext(unitName="SpringBookPU")
     private EntityManager em;
     public EntityManager getEm() {
         return em;
@@ -28,47 +29,52 @@ public class PublicationDAOImpl implements PublicationDAO {
     public void setEm(EntityManager em) {
         this.em = em;
     }
-    
-    //ovveride
-    @Override   
+
+    @Override
     @Transactional
-    public PublicationEntity save(PublicationEntity h) {
-         h = em.merge(h);
+    public AmitieEntity save(AmitieEntity h) {
+        h = em.merge(h);
         em.persist(h);
         return h;
     }
 
     @Override
     @Transactional
-    public void update(PublicationEntity h) {
-         h = em.merge(h);
+    public void update(AmitieEntity h) {
+        em.merge(h);
     }
 
     @Override
     @Transactional
-    public void delete(PublicationEntity h) {
+    public void delete(AmitieEntity h) {
         h = em.merge(h);
         em.remove(h);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public PublicationEntity find(long id) {
-       return em.find(PublicationEntity.class, id);
+    public AmitieEntity find(long id) {
+        return em.find(AmitieEntity.class, id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<PublicationEntity> findAll() {
-        Query q = em.createQuery("SELECT h FROM PublicationEntity h");
+    public List<AmitieEntity> findAll() {
+        Query q = em.createQuery("SELECT h FROM AmitieEntity h");
         return q.getResultList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<PublicationEntity> getMyWall(IdentityEntity mur) {
-        
-        Query q = em.createQuery("SELECT p  FROM PublicationEntity p join p.mur i WHERE i.id = :idMur").setParameter("idMur",mur.getId());
+    public List<IdentityEntity> getMyFriends(IdentityEntity me) {
+        Query q = em.createQuery("SELECT a.ami FROM AmitieEntity a  WHERE (a.poss = :me)").setParameter("me",me);
+        return q.getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<IdentityEntity> isMyFriends(IdentityEntity me, IdentityEntity ami) {    
+        Query q = em.createQuery("SELECT a.ami FROM AmitieEntity a  WHERE (a.poss = :me) AND (a.ami = :ami)").setParameter("me",me).setParameter("ami", ami);
         return q.getResultList();
     }
     

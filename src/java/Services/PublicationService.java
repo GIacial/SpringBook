@@ -16,6 +16,6 @@ import java.util.List;
  */
 public interface PublicationService {
     
-    public void createPublication(String msg , IdentityEntity auteur);
+    public void createPublication(String msg , IdentityEntity auteur, IdentityEntity mur);
     public List<PublicationEntity> getAllPublication(IdentityEntity mur);
 }

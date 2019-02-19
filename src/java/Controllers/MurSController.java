@@ -8,6 +8,7 @@ package Controllers;
 
 import Database.Entity.IdentityEntity;
 import Database.Entity.PublicationEntity;
+import Services.AmitieService;
 import Services.IdentityService;
 import Services.PublicationService;
 import java.util.Collections;
@@ -35,8 +36,12 @@ public class MurSController {
     @Autowired
     private PublicationService publicationService;
     
+    
+    @Autowired
+    private AmitieService amitieService;
+    
     @RequestMapping (value="amimur" , method = RequestMethod.GET)
-    public ModelAndView handleRequestInternal (HttpServletRequest request , @RequestParam long keyIdentity) throws Exception{
+    public ModelAndView handleRequestInternal (HttpServletRequest request , @RequestParam long pseudo) throws Exception{
         String result = "Erreur d'identification";    
         ModelAndView mv = null;      
         HttpSession session = request.getSession (true);
@@ -45,12 +50,13 @@ public class MurSController {
         if(currentLogin != null){
             //ModelVue
             mv = new ModelAndView("mur");
+            long keyIdentity = pseudo;
             IdentityEntity identity = identityService.findIdentity(keyIdentity);
             IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
             if(identity != null){        
                 mv.addObject("pseudo", identity.getPseudo());
                 mv.addObject("myPage", identityLogin.equals(identity));
-                mv.addObject("ami" , false);
+                mv.addObject("ami" , amitieService.isMyFriends(identityLogin, identity) );
                 mv.addObject("key",keyIdentity);
                 List<PublicationEntity> pubs = publicationService.getAllPublication(identity);
                 Collections.reverse( pubs);
@@ -96,9 +102,9 @@ public class MurSController {
             IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
             if(identity != null){           
                 //regarder si c'est le sien ou d'un ami
-                if(identity.equals(identityLogin)){//ma page ou celle d'un ami
+                if(identity.equals(identityLogin) || this.amitieService.isMyFriends(identityLogin, identity) ){//ma page ou celle d'un ami
                     //on enregistre   
-                    this.publicationService.createPublication(request.getParameter("msg"), identityLogin);
+                    this.publicationService.createPublication(request.getParameter("msg"), identityLogin,identity);
                     
                     //puis retourne sur la page
                     mv = this.handleRequestInternal(request, key);
@@ -106,6 +112,36 @@ public class MurSController {
                 else{
                     mv = this.handleRequestInternal(request, key);
                     mv.addObject("alert","Vous n'avez pas les droits pour faire ça");
+                }
+            }
+        }
+        return mv;
+    }
+    
+    @RequestMapping (value="addami" , method = RequestMethod.POST)
+    public ModelAndView ajouterAmi (HttpServletRequest request ) throws Exception{
+         HttpSession session = request.getSession (true);
+        ModelAndView mv = new ModelAndView("index"); 
+        mv.addObject("alert", "Vous n'êtes pas connecté");
+        String currentLogin = (String)session.getAttribute("login");
+        if( currentLogin!= null){
+            
+            long key =  Integer.parseInt(request.getParameter("key"));
+            IdentityEntity identity = identityService.findIdentity(key);
+            IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
+            if(identity != null){           
+                //regarder si c'est le sien ou d'un ami
+                if(identity.equals(identityLogin) || this.amitieService.isMyFriends(identityLogin, identity)){//ma page ou celle d'un ami
+                    mv = this.handleRequestInternal(request, key);
+                    mv.addObject("alert","Vous etes déjà ami");
+                     
+                }
+                else{
+                    //ajouter en ami 
+                    amitieService.addAmi(identityLogin, identity);
+                    this.publicationService.createPublication(identityLogin.getPseudo() + " vous a ajouté comme amis", identityLogin , identity);
+                    //puis retourne sur la page
+                    mv = this.handleRequestInternal(request, key);
                 }
             }
         }

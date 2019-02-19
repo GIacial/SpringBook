@@ -6,6 +6,7 @@
 
 package Services.Impl;
 
+import Database.Dao.AmitieDAO;
 import Database.Dao.IdentityDAO;
 import Database.Entity.IdentityEntity;
 import Services.IdentityService;
@@ -22,6 +23,7 @@ public class IdentityServiceImpl implements IdentityService {
     
     @Resource
     private IdentityDAO identityR;
+    
 
     @Override
     public IdentityEntity findIdentity(String adresseMail) {

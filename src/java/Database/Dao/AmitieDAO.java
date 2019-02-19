@@ -6,6 +6,7 @@
 
 package Database.Dao;
 
+import Database.Entity.AmitieEntity;
 import Database.Entity.IdentityEntity;
 import java.util.List;
 
@@ -13,8 +14,9 @@ import java.util.List;
  *
  * @author jérémy
  */
-public interface IdentityDAO extends AbstractDAO<IdentityEntity> {
+public interface AmitieDAO extends AbstractDAO <AmitieEntity>{
     
-    public List<IdentityEntity> findByEMail(String email);
-    public List<IdentityEntity> findOthersPeople(IdentityEntity me);
+    public List<IdentityEntity> getMyFriends (IdentityEntity me);
+    public List<IdentityEntity> isMyFriends (IdentityEntity me , IdentityEntity ami);
+    
 }

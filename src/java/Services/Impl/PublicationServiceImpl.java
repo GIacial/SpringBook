@@ -27,8 +27,8 @@ public class PublicationServiceImpl implements PublicationService {
     private PublicationDAO publications;
 
     @Override
-    public void createPublication(String msg, IdentityEntity auteur) {
-        publications.save(new PublicationEntity(msg,auteur));
+    public void createPublication(String msg, IdentityEntity auteur , IdentityEntity mur) {
+        publications.save(new PublicationEntity(msg,auteur, mur));
     }
 
     @Override
