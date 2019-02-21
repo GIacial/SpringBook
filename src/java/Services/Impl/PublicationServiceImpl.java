@@ -6,7 +6,6 @@
 
 package Services.Impl;
 
-import Database.Dao.AuthentificationDAO;
 import Database.Dao.PublicationDAO;
 import Database.Entity.IdentityEntity;
 import Database.Entity.PublicationEntity;
@@ -14,6 +13,7 @@ import Services.PublicationService;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  *
@@ -28,6 +28,7 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public void createPublication(String msg, IdentityEntity auteur , IdentityEntity mur) {
+        msg = HtmlUtils.htmlEscape(msg);
         publications.save(new PublicationEntity(msg,auteur, mur));
     }
 

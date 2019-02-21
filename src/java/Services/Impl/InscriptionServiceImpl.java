@@ -13,6 +13,7 @@ import Database.Entity.IdentityEntity;
 import Services.InscriptionService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  *
@@ -31,6 +32,10 @@ public class InscriptionServiceImpl implements InscriptionService {
     public boolean inscription(String email, String mdp, String pseudo) {
         //vérif
         boolean inscrit = email.length()>0 && mdp.length()>0 && pseudo.length()>0;
+        
+        email = HtmlUtils.htmlEscape(email);
+        pseudo = HtmlUtils.htmlEscape(pseudo);
+        
         
         if(inscrit){
             //faire l'inscription
