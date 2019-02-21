@@ -57,5 +57,16 @@ public class AmitieServiceImpl implements AmitieService {
         }
         return unknowUser;
     }
+
+    @Override
+    public void deleteFriend(IdentityEntity me, IdentityEntity ami) {
+        List<AmitieEntity> amitie = this.amitieR.getMyLink(me, ami);
+        if( !amitie.isEmpty()){
+            AmitieEntity amis = amitie.get(0);
+            if( amis.getAmi().equals(ami) && amis.getPoss().equals(me)){
+                this.amitieR.delete(amis);
+            }
+        }
+    }
     
 }

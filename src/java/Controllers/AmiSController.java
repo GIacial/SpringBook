@@ -9,8 +9,10 @@ package Controllers;
 import Database.Dao.AmitieDAO;
 import Database.Dao.IdentityDAO;
 import Database.Entity.IdentityEntity;
+import Database.Entity.PublicationEntity;
 import Services.AmitieService;
 import Services.IdentityService;
+import Services.PublicationService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,6 +36,10 @@ public class AmiSController {
     @Autowired
     private IdentityService identityService;
     
+    
+    @Autowired
+    private PublicationService publicationService;
+    
     @RequestMapping (value="ami" , method = RequestMethod.GET)
     public ModelAndView handleRequestInternal (HttpServletRequest request ) throws Exception{
         String result = "Erreur d'identification";    
@@ -53,6 +59,35 @@ public class AmiSController {
         else{
             mv = new ModelAndView("index");
             mv.addObject("alert", result);
+        }
+        return mv;
+    }
+    
+    @RequestMapping (value="supprimerami" , method = RequestMethod.POST)
+    public ModelAndView supprimerAmi (HttpServletRequest request , HttpServletResponse responce ) throws Exception{
+         HttpSession session = request.getSession (true);
+        ModelAndView mv = new ModelAndView("index"); 
+        mv.addObject("alert", "Vous n'êtes pas connecté");
+        String currentLogin = (String)session.getAttribute("login");
+        if( currentLogin!= null){
+            
+            long key =  Integer.parseInt(request.getParameter("key"));
+            IdentityEntity identity = identityService.findIdentity(key);
+            IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
+            if(identity != null){           
+                //regarder si c'est le sien ou d'un ami
+                if(this.amitieService.isMyFriends(identityLogin, identity)){
+                    //supprimer ami
+                    
+                    this.amitieService.deleteFriend(identityLogin, identity);
+                    this.publicationService.createPublication(identityLogin.getPseudo() + " vous a supprimer de ses amis", identityLogin, identity);
+                    responce.sendRedirect("ami.htm");
+                }
+                else{
+                    mv = new ModelAndView("gestion_ami");
+                    mv.addObject("alert","Vous n'êtes pas ami");
+                }
+            }
         }
         return mv;
     }

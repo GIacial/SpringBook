@@ -20,4 +20,5 @@ public interface AmitieService {
     public boolean isMyFriends (IdentityEntity me , IdentityEntity ami);
     
     public List<IdentityEntity> getAllFuturFriends (IdentityEntity me);
+    public void deleteFriend (IdentityEntity me , IdentityEntity ami);
 }

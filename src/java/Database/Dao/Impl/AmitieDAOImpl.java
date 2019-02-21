@@ -77,5 +77,12 @@ public class AmitieDAOImpl implements AmitieDAO {
         Query q = em.createQuery("SELECT a.ami FROM AmitieEntity a  WHERE (a.poss = :me) AND (a.ami = :ami)").setParameter("me",me).setParameter("ami", ami);
         return q.getResultList();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AmitieEntity> getMyLink(IdentityEntity me, IdentityEntity ami) {
+        Query q = em.createQuery("SELECT a FROM AmitieEntity a  WHERE (a.poss = :me) AND (a.ami = :ami)").setParameter("me",me).setParameter("ami", ami);
+        return q.getResultList();
+    }
     
 }

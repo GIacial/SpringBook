@@ -12,9 +12,10 @@
   <div class="card-body ">
     <p class="card-text"><a  href="amimur.htm?pseudo=${param.id}">${param.pseudo}</a></p>
     <c:if test="${param.ami}">
-        <form method="POST" ACTION="SupprimerAmi.htm" class="container">
+        <form method="POST" ACTION="supprimerami.htm" class="container">
             <div class="form-group">
 
+            <input type="hidden"    name="key" value="${param.id}">
             <button type="submit" class="btn btn-primary">Supprimer</button>
           </form>
     </c:if>

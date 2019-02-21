@@ -18,5 +18,6 @@ public interface AmitieDAO extends AbstractDAO <AmitieEntity>{
     
     public List<IdentityEntity> getMyFriends (IdentityEntity me);
     public List<IdentityEntity> isMyFriends (IdentityEntity me , IdentityEntity ami);
+    public List<AmitieEntity> getMyLink(IdentityEntity me , IdentityEntity ami);
     
 }
