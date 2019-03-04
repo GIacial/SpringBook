@@ -30,7 +30,23 @@
                 <div class="row">
                   <div class="col-sm-3">
                       <!-- Identite du proprietaire du mur -->
-                      <div>Nom : ${pseudo}</div>
+                      <div>              
+                        <div>Nom : ${pseudo}</div>
+                      </div>
+                       <!-- Notification de mon mur -->
+                      <c:if test="${myPage }">
+                         <div>  
+                         <!-- notif-->
+                          <c:forEach items="${notifs}" var="notif">
+                            <jsp:include page="notification.jsp">                         
+                              <jsp:param name="pseudoAuteur" value="${notif.getAuteur().getPseudo()}" />  
+                              <jsp:param name="idAuteur" value="${notif.auteur.getId()}" />             
+                              <jsp:param name="msg" value="${notif.msg}" />
+                          </jsp:include>
+                        </c:forEach>
+                          
+                        </div>
+                      </c:if>
                   </div>
                   <div class="col-sm-9" >
                       <!-- le mur -->

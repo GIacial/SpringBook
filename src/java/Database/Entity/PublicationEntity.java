@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -32,7 +31,7 @@ public class PublicationEntity implements Serializable {
     @Column
     private String message;
     
-    @OneToOne
+    @ManyToOne
     private IdentityEntity auteur;
     
     

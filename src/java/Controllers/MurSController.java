@@ -10,6 +10,7 @@ import Database.Entity.IdentityEntity;
 import Database.Entity.PublicationEntity;
 import Services.AmitieService;
 import Services.IdentityService;
+import Services.NotificationService;
 import Services.PublicationService;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +40,9 @@ public class MurSController {
     
     @Autowired
     private AmitieService amitieService;
+     
+    @Autowired
+    private NotificationService notificationService;
     
     @RequestMapping (value="amimur" , method = RequestMethod.GET)
     public ModelAndView handleRequestInternal (HttpServletRequest request , @RequestParam long pseudo) throws Exception{
@@ -58,6 +62,7 @@ public class MurSController {
                 mv.addObject("myPage", identityLogin.equals(identity));
                 mv.addObject("ami" , amitieService.isMyFriends(identityLogin, identity) );
                 mv.addObject("key",keyIdentity);
+                mv.addObject("notifs",notificationService.getMyNotification(identityLogin));
                 List<PublicationEntity> pubs = publicationService.getAllPublication(identity);
                 Collections.reverse( pubs);
                 mv.addObject("publications", pubs);
@@ -139,7 +144,7 @@ public class MurSController {
                 else{
                     //ajouter en ami 
                     amitieService.addAmi(identityLogin, identity);
-                    this.publicationService.createPublication(identityLogin.getPseudo() + " vous a ajouté comme amis", identityLogin , identity);
+                    this.notificationService.createNotification(identityLogin.getPseudo() + " vous a ajouté comme amis", identityLogin , identity);
                     //puis retourne sur la page
                     mv = this.handleRequestInternal(request, key);
                 }

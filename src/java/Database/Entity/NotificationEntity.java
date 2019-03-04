@@ -7,43 +7,45 @@
 package Database.Entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author jérémy
  */
 @Entity
-public class IdentityEntity implements Serializable {
-    
+public class NotificationEntity implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    //value
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-       
-    @Column
-    private String pseudo;
     
-    @OneToOne
-    private AuthentificationEntity authentification;
+    @ManyToOne
+    private IdentityEntity auteur;
     
+     @ManyToOne
+    private IdentityEntity cible;
+    
+    private String msg;
     
     //constructeur
-    public IdentityEntity(String pseudo) {
-        this.pseudo = pseudo;
+    
+    public NotificationEntity (String msg , IdentityEntity auteur ,  IdentityEntity cible){
+        this.msg = msg;
+        this.auteur = auteur;
+        this.cible = cible;
     }
     
-    public IdentityEntity() {
-        this("");
+    public NotificationEntity(){
+        this("",null,null);
     }
-    
 
     //getter setter
     public Long getId() {
@@ -54,26 +56,36 @@ public class IdentityEntity implements Serializable {
         this.id = id;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public IdentityEntity getCible() {
+        return cible;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setCible(IdentityEntity cible) {
+        this.cible = cible;
     }
 
-    public AuthentificationEntity getAuthentification() {
-        return authentification;
+    public IdentityEntity getAuteur() {
+        return auteur;
     }
 
-    public void setAuthentification(AuthentificationEntity authentification) {
-        this.authentification = authentification;
+    public void setAuteur(IdentityEntity auteur) {
+        this.auteur = auteur;
     }
 
+    public String getMsg() {
+        return msg;
+    }
 
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
     
+    
+    
+    
+    
+    //override
 
-    //Override
     @Override
     public int hashCode() {
         int hash = 0;
@@ -84,10 +96,10 @@ public class IdentityEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IdentityEntity)) {
+        if (!(object instanceof NotificationEntity)) {
             return false;
         }
-        IdentityEntity other = (IdentityEntity) object;
+        NotificationEntity other = (NotificationEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -96,7 +108,7 @@ public class IdentityEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Database.Entity.IdentityEntity[ id=" + id + " ]";
+        return "Database.Entity.NotificationEntity[ id=" + id + " ]";
     }
     
 }
