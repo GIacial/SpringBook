@@ -30,11 +30,16 @@
                 <div class="row">
                   <div class="col-sm-3">
                       <!-- Identite du proprietaire du mur -->
-                      <div>              
-                        <div>Nom : ${pseudo}</div>
+                      
+                      <div class="card  border-primary bg-light mb-3" >
+                        <div class="card-header">Profil de ${pseudo}</div>
+                        <div class="card-body ">
+                          <p class="card-text">des informations sur ${pseudo}</p>
+                        </div>
                       </div>
                        <!-- Notification de mon mur -->
                       <c:if test="${myPage }">
+                          <h2>Notifications</h2>
                          <div>  
                          <!-- notif-->
                           <c:forEach items="${notifs}" var="notif">
