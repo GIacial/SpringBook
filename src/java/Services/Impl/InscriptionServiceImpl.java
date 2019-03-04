@@ -29,7 +29,7 @@ public class InscriptionServiceImpl implements InscriptionService {
     private IdentityDAO identityR;
 
     @Override
-    public boolean inscription(String email, String mdp, String pseudo) {
+    public boolean inscription(String email, String mdp, String pseudo , String adresse , String codePostal , String ville , String naissance , String genre , String profession) {
         //vérif
         boolean inscrit = email.length()>0 && mdp.length()>0 && pseudo.length()>0;
         
@@ -43,7 +43,7 @@ public class InscriptionServiceImpl implements InscriptionService {
             inscrit = this.authentificationR.findByEMail(email).isEmpty();
             if(inscrit){           
                 nouv = this.authentificationR.save(nouv);       
-                IdentityEntity identity = new IdentityEntity(pseudo);
+                IdentityEntity identity = new IdentityEntity(pseudo , adresse , codePostal , ville , naissance , genre , profession);
                 
                 identity.setAuthentification(nouv);
                 this.identityR.save(identity);

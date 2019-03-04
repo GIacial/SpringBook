@@ -12,5 +12,5 @@ package Services;
  */
 public interface InscriptionService {
     
-    public boolean inscription (String email , String mdp , String pseudo);
+    public boolean inscription (String email , String mdp , String pseudo , String adresse , String codePostal , String ville , String naissance , String genre , String profession);
 }

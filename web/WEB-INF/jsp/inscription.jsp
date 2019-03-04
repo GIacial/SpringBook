@@ -32,14 +32,47 @@
                   <label for="exampleInputEmail1">Email</label>
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="login">
                 </div>
+                
                 <div class="form-group">
                   <label for="exampleInputPassword1">Mot de passe</label>
                   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                 </div>
+                
                 <div class="form-group">
                   <label for="inputPseudo">Pseudo</label>
                   <input type="text" class="form-control" id="inputPseudo"  placeholder="Pseudo" name="pseudo">
                 </div>
+                
+                <div class="form-group">
+                  <label for="inputCodePostal">CodePostal</label>
+                  <input type="text" class="form-control" id="inputCodePostal"  placeholder="CodePostal" name="CodePostal">
+                </div>
+                
+                <div class="form-group">
+                  <label for="inputVille">Ville</label>
+                  <input type="text" class="form-control" id="inputVille"  placeholder="Ville" name="Ville">
+                </div>
+                
+                <div class="form-group">
+                  <label for="inputAdresse">Adresse</label>
+                  <input type="text" class="form-control" id="inputAdresse"  placeholder="Adresse" name="Adresse">
+                </div>
+                
+                <div class="form-group">
+                  <label for="inputNaissance">Date de Naissance</label>
+                  <input type="text" class="form-control" id="inputNaissance"  placeholder="Date de Naissance" name="Naissance">
+                </div>
+                
+                <div class="form-group">
+                  <label for="inputGenre">Genre</label>
+                  <input type="text" class="form-control" id="inputGenre"  placeholder="Genre" name="Genre">
+                </div>
+                
+                <div class="form-group">
+                  <label for="inputProfession">Profession</label>
+                  <input type="text" class="form-control" id="inputProfession"  placeholder="Profession" name="Profession">
+                </div>
+                
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
         </div>

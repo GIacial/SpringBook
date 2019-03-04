@@ -32,6 +32,9 @@
                       <jsp:param name="ami" value="true" />  
                   </jsp:include>
                 </c:forEach>
+            <c:if test="${amis.isEmpty() }">
+                <p class="text-center">Vous n'avez pas encore d'amis vous pouvez en ajouter en cliquant sur les personnes plus bas dans la page</p>   
+            </c:if>
             
             <h1 class="text-center">D'autres personnes</h1>
                 <c:forEach items="${autres}" var="pub">
@@ -41,7 +44,9 @@
                       <jsp:param name="ami" value="false" />  
                   </jsp:include>
                 </c:forEach>
-            
+            <c:if test="${autres.isEmpty() }">
+                <p class="text-center">Vous êtes le seul inscript sur ce site. Parlez en à vos connaissances dans le monde réel pour les faire venir</p>   
+            </c:if>
         </div>
         
     </body>

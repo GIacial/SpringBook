@@ -25,16 +25,19 @@
         <jsp:include page="navbar.jsp" >
             <jsp:param name="page" value="1" />
           </jsp:include>
-            <div class="container">
-                <h1 class="text-center">Mur de ${pseudo}</h1>
+            <div class="container-fluid">
+                <h1 class="text-center">Mur de ${identity.getPseudo()}</h1>
                 <div class="row">
                   <div class="col-sm-3">
                       <!-- Identite du proprietaire du mur -->
                       
                       <div class="card  border-primary bg-light mb-3" >
-                        <div class="card-header">Profil de ${pseudo}</div>
+                          <div class="card-header">Profil de <b>${identity.getPseudo()}</b></div>
                         <div class="card-body ">
-                          <p class="card-text">des informations sur ${pseudo}</p>
+                            <p class="card-text"><u>Localisation</u> : ${identity.getAdresse()} ${identity.getCodePostal()} ${identity.getVille()}</p>
+                            <p class="card-text"><u>Date de naissance</u> : ${identity.getNaissance()} </p>
+                            <p class="card-text"><u>Genre</u> : ${identity.getGenre()} </p>
+                            <p class="card-text"><u>Profession</u> : ${identity.getProfession()} </p>
                         </div>
                       </div>
                        <!-- Notification de mon mur -->

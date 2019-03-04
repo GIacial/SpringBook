@@ -7,6 +7,7 @@
 package Controllers;
 
 import Database.Entity.IdentityEntity;
+import Database.Entity.NotificationEntity;
 import Database.Entity.PublicationEntity;
 import Services.AmitieService;
 import Services.IdentityService;
@@ -57,14 +58,18 @@ public class MurSController {
             long keyIdentity = pseudo;
             IdentityEntity identity = identityService.findIdentity(keyIdentity);
             IdentityEntity identityLogin = identityService.findIdentity(currentLogin) ;
-            if(identity != null){        
-                mv.addObject("pseudo", identity.getPseudo());
+            if(identity != null){     
+                
+                List<PublicationEntity> pubs = publicationService.getAllPublication(identity);
+                Collections.reverse( pubs);
+                List<NotificationEntity> notifs = notificationService.getMyNotification(identityLogin);
+                Collections.reverse(notifs);
+                
+                mv.addObject("identity", identity);
                 mv.addObject("myPage", identityLogin.equals(identity));
                 mv.addObject("ami" , amitieService.isMyFriends(identityLogin, identity) );
                 mv.addObject("key",keyIdentity);
-                mv.addObject("notifs",notificationService.getMyNotification(identityLogin));
-                List<PublicationEntity> pubs = publicationService.getAllPublication(identity);
-                Collections.reverse( pubs);
+                mv.addObject("notifs",notifs);
                 mv.addObject("publications", pubs);
             }
             else{

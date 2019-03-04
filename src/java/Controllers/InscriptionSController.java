@@ -37,12 +37,18 @@ public class InscriptionSController {
         
         String login = request.getParameter("login");
         String mdp   = request.getParameter("password");
-        String pseudo = request.getParameter("pseudo");     
+        String pseudo = request.getParameter("pseudo"); 
+        String adresse = request.getParameter("Adresse");  
+        String codePostal = request.getParameter("CodePostal");  
+        String ville = request.getParameter("Ville");  
+        String naissance = request.getParameter("Naissance");  
+        String genre = request.getParameter("Genre"); 
+        String profession = request.getParameter("Profession");     
         HttpSession session = request.getSession (true);
         
         ModelAndView mv = null;
         
-        if(inscriptionService.inscription(login, mdp, pseudo)){
+        if(inscriptionService.inscription(login, mdp, pseudo , adresse , codePostal , ville , naissance , genre , profession)){
             //connexion auto lors de l'inscription
             session.setAttribute("login" , login);
             //redirect
