@@ -12,6 +12,7 @@ import Database.Entity.IdentityEntity;
 import Database.Entity.PublicationEntity;
 import Services.AmitieService;
 import Services.IdentityService;
+import Services.NotificationService;
 import Services.PublicationService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -38,7 +38,7 @@ public class AmiSController {
     
     
     @Autowired
-    private PublicationService publicationService;
+    private NotificationService notificationService;
     
     @RequestMapping (value="ami" , method = RequestMethod.GET)
     public ModelAndView handleRequestInternal (HttpServletRequest request ) throws Exception{
@@ -80,7 +80,7 @@ public class AmiSController {
                     //supprimer ami
                     
                     this.amitieService.deleteFriend(identityLogin, identity);
-                    this.publicationService.createPublication(identityLogin.getPseudo() + " vous a supprimer de ses amis", identityLogin, identity);
+                    this.notificationService.createNotification(identityLogin.getPseudo() + " vous a supprimer de ses amis", identityLogin, identity);
                     responce.sendRedirect("ami.htm");
                 }
                 else{
