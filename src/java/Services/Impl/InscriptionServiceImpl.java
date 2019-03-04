@@ -36,6 +36,13 @@ public class InscriptionServiceImpl implements InscriptionService {
         email = HtmlUtils.htmlEscape(email);
         pseudo = HtmlUtils.htmlEscape(pseudo);
         
+        adresse = HtmlUtils.htmlEscape(adresse);
+        codePostal = HtmlUtils.htmlEscape(codePostal);
+        ville = HtmlUtils.htmlEscape(ville);
+        naissance = HtmlUtils.htmlEscape(naissance);
+        genre = HtmlUtils.htmlEscape(genre);
+        profession = HtmlUtils.htmlEscape(profession);
+        
         
         if(inscrit){
             //faire l'inscription
