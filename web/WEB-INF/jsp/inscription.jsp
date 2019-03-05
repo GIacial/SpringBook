@@ -40,7 +40,8 @@
                 
                 <div class="form-group">
                   <label for="inputPseudo">Pseudo</label>
-                  <input type="text" class="form-control" id="inputPseudo"  placeholder="Pseudo" name="pseudo">
+                  <input type="text" class="form-control" id="inputPseudo"  placeholder="Pseudo" name="pseudo" onkeydown="if(event.keyCode==32) return false;">
+                  <!--empeche de mettre espace -->
                 </div>
                 
                 <div class="form-group">
