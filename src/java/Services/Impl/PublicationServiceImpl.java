@@ -12,8 +12,12 @@ import Database.Entity.ImagePublicationEntity;
 import Database.Entity.PublicationEntity;
 import Services.PublicationService;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
@@ -44,15 +48,17 @@ public class PublicationServiceImpl implements PublicationService {
     public void createPublication(String msg, String pathMedia, IdentityEntity auteur, IdentityEntity mur) {
         if(pathMedia!= null && !pathMedia.equals("")){
             
+            try {
+                URL url = new URL(pathMedia);
                 msg = HtmlUtils.htmlEscape(msg);
-                
+
                 PublicationEntity pub = new ImagePublicationEntity(msg,pathMedia,auteur,mur);
-                       
-                    publications.save(pub);
-                    return;
-                    
-                
-            
+
+                publications.save(pub);
+                return;
+            } catch (MalformedURLException ex) {
+                System.err.println("incoret url");
+            }
             
         }
         //cas d'erreur

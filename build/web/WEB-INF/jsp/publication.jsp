@@ -16,7 +16,7 @@
   <div class="card-body ">
     <p class="card-text">${param.msg}</p>
         <img 
-     src="${param.img}"/>
+     src="${param.img}" />
   </div>
 </div>
 

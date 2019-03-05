@@ -85,9 +85,9 @@
                                 <div class="form-group">
                                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="msg"></textarea>
                                 </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" name="media">
-                                    <label class="custom-file-label" for="customFile">Ajouter une image ou une vidéo</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="customFile" name="media">
+                                    <label  for="customFile">Ajouter une image par url</label>
                                   </div>
                               <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Publier</button>
