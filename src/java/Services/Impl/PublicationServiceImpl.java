@@ -8,8 +8,11 @@ package Services.Impl;
 
 import Database.Dao.PublicationDAO;
 import Database.Entity.IdentityEntity;
+import Database.Entity.ImagePublicationEntity;
 import Database.Entity.PublicationEntity;
 import Services.PublicationService;
+import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,27 @@ public class PublicationServiceImpl implements PublicationService {
     @Override
     public List<PublicationEntity> getAllPublication(IdentityEntity mur) {
         return this.publications.getMyWall(mur);
+    }
+
+    @Override
+    public void createPublication(String msg, String pathMedia, IdentityEntity auteur, IdentityEntity mur) {
+        if(pathMedia!= null && !pathMedia.equals("")){
+            
+                msg = HtmlUtils.htmlEscape(msg);
+                
+                PublicationEntity pub = new ImagePublicationEntity(msg,pathMedia,auteur,mur);
+                       
+                    publications.save(pub);
+                    return;
+                    
+                
+            
+            
+        }
+        //cas d'erreur
+            //redirection sur un publication text
+            this.createPublication(msg, auteur, mur);
+        
     }
     
 }

@@ -115,7 +115,7 @@ public class MurSController {
                 if(identity.equals(identityLogin) || this.amitieService.isMyFriends(identityLogin, identity) ){//ma page ou celle d'un ami
                     //on enregistre  
                     String msg = request.getParameter("msg");
-                    this.publicationService.createPublication(msg, identityLogin,identity);
+                    this.publicationService.createPublication(msg, request.getParameter("media"),identityLogin,identity);
                     this.verifItentification(msg, identityLogin, identity);
                     //puis retourne sur la page
                     mv = this.handleRequestInternal(request, key);
@@ -161,13 +161,10 @@ public class MurSController {
     
     private void verifItentification(String msg , IdentityEntity auteur , IdentityEntity mur){
         
-        System.err.println("Phrase :"+msg);
         String[] mots = msg.split(" ");
         for(String mot : mots){
             
-                System.err.println("Mot :"+mot);
             if(mot.startsWith("#")){
-                System.err.println("SubMot :"+mot.substring(1));
                 List<IdentityEntity> identifPeople  = this.identityService.findByName(mot.substring(1));
                 for(IdentityEntity i : identifPeople){
                     if(this.amitieService.isMyFriends(auteur, i)){

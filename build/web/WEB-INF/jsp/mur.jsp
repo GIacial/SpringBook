@@ -78,15 +78,17 @@
                       <!-- button de publication sur le mur -->
                       <c:if test="${myPage || ami}">
                           <div class="card  border-primary bg-light mb-3" >
-                            <div class="card-header">Publier sur le mur
-                                      </div>
+                            <div class="card-header">Publier sur le mur</div>
                             <div class="card-body ">
                                 <form method="POST" ACTION="publier.htm" class="container">
 
                                 <div class="form-group">
-                                  
                                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="msg"></textarea>
                                 </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="media">
+                                    <label class="custom-file-label" for="customFile">Ajouter une image ou une vidéo</label>
+                                  </div>
                               <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Publier</button>
                           </form>
@@ -101,7 +103,8 @@
                               <jsp:param name="pseudoAuteur" value="${pub.getAuteur().getPseudo()}" />  
                               <jsp:param name="id" value="${pub.auteur.getId()}" />            
                               <jsp:param name="create" value="${pub.creation}" />             
-                              <jsp:param name="msg" value="${pub.message}" />
+                              <jsp:param name="msg" value="${pub.message}" />                    
+                              <jsp:param name="img" value="${pub.getCheminImage()}" />
                           </jsp:include>
                         </c:forEach>
                        <!--         </div>-->
