@@ -7,6 +7,7 @@
 package Services;
 
 import Database.Entity.IdentityEntity;
+import java.util.List;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface IdentityService {
     
     public IdentityEntity findIdentity (String adresseMail);
     public IdentityEntity findIdentity(long key);
+    public List<IdentityEntity> findByName(String name);
     
 }

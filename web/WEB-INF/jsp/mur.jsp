@@ -26,7 +26,13 @@
             <jsp:param name="page" value="1" />
           </jsp:include>
             <div class="container-fluid">
-                <h1 class="text-center">Mur de ${identity.getPseudo()}</h1>
+                
+                <c:if test="${myPage }">
+                     <h1 class="text-center">Mon mur</h1>    
+                </c:if>
+                <c:if test="${!myPage }">
+                     <h1 class="text-center">Mur de ${identity.getPseudo()}</h1>  
+                </c:if>
                 <div class="row">
                   <div class="col-sm-3">
                       <!-- Identite du proprietaire du mur -->

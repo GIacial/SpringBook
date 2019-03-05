@@ -17,4 +17,5 @@ public interface IdentityDAO extends AbstractDAO<IdentityEntity> {
     
     public List<IdentityEntity> findByEMail(String email);
     public List<IdentityEntity> findOthersPeople(IdentityEntity me);
+    public List<IdentityEntity> findByName(String name);
 }

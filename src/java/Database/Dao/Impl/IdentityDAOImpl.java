@@ -77,5 +77,13 @@ public class IdentityDAOImpl implements IdentityDAO {
         Query q = em.createQuery("SELECT i FROM IdentityEntity i  WHERE NOT (i.id = :myId)").setParameter("myId",me.getId());
         return q.getResultList();
     }
+
+    @Override 
+    @Transactional(readOnly = true)
+    public List<IdentityEntity> findByName(String name) {
+        
+        Query q = em.createQuery("SELECT i FROM IdentityEntity i  WHERE i.pseudo LIKE :pseudo").setParameter("pseudo",name);
+        return q.getResultList();
+    }
     
 }

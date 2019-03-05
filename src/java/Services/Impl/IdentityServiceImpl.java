@@ -39,5 +39,10 @@ public class IdentityServiceImpl implements IdentityService {
     public IdentityEntity findIdentity(long key) {
         return identityR.find(key);
     }
+
+    @Override
+    public List<IdentityEntity> findByName(String name) {
+        return identityR.findByName(name);
+    }
     
 }
