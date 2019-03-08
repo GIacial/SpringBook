@@ -105,7 +105,7 @@ public class PublicationEntity implements Serializable {
     }
     
       public String getCheminImage() {
-        return null;
+        return "";
     }
     
     

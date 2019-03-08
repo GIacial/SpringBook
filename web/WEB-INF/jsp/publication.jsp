@@ -15,8 +15,10 @@
             </div>
   <div class="card-body ">
     <p class="card-text">${param.msg}</p>
+    <c:if test="${param.img != ''}">
         <img 
-     src="${param.img}" />
+     src="${param.img}" style="width : 80%;" alt="url:${param.img}"/>
+    </c:if>
   </div>
 </div>
 
