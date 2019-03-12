@@ -10,6 +10,7 @@ import Database.Dao.PublicationDAO;
 import Database.Entity.IdentityEntity;
 import Database.Entity.ImagePublicationEntity;
 import Database.Entity.PublicationEntity;
+import Database.Entity.VideoPublicationEntity;
 import Services.PublicationService;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -51,8 +52,15 @@ public class PublicationServiceImpl implements PublicationService {
             try {
                 URL url = new URL(pathMedia);
                 msg = HtmlUtils.htmlEscape(msg);
-
-                PublicationEntity pub = new ImagePublicationEntity(msg,pathMedia,auteur,mur);
+                PublicationEntity pub = null;
+                if(pathMedia.contains("https://www.youtube.com/embed/")){
+                    //video
+                   pub = new VideoPublicationEntity(msg,pathMedia,auteur,mur);
+                }
+                else{
+                   pub = new ImagePublicationEntity(msg,pathMedia,auteur,mur);
+                }
+                
 
                 publications.save(pub);
                 return;

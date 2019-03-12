@@ -16,8 +16,10 @@
   <div class="card-body ">
     <p class="card-text">${param.msg}</p>
     <c:if test="${param.img != ''}">
-        <img 
-     src="${param.img}" style="width : 80%;" alt="url:${param.img}"/>
+        <img src="${param.img}" style="width : 80%;" alt="url:${param.img}"/>
+    </c:if>
+    <c:if test="${param.video != ''}">
+        <iframe width="560" height="315" src="${param.video}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </c:if>
   </div>
 </div>

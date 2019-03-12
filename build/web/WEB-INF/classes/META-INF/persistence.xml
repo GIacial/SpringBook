@@ -7,6 +7,8 @@
     <class>Database.Entity.PublicationEntity</class>
     <class>Database.Entity.AmitieEntity</class>
     <class>Database.Entity.NotificationEntity</class>
+    <class>Database.Entity.ImagePublicationEntity</class>
+    <class>Database.Entity.VideoPublicationEntity</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/SpringBook"/>

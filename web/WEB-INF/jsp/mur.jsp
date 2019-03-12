@@ -86,8 +86,9 @@
                                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="msg"></textarea>
                                 </div>
                                 <div class="form-group">
+                                    
+                                    <label  for="customFile">Ajouter une image ou vidéo youtube par url</label>
                                     <input type="text" class="form-control" id="customFile" name="media">
-                                    <label  for="customFile">Ajouter une image par url</label>
                                   </div>
                               <input type="hidden"    name="key" value="${key}">
                             <button type="submit" class="btn btn-primary">Publier</button>
@@ -104,7 +105,8 @@
                               <jsp:param name="id" value="${pub.auteur.getId()}" />            
                               <jsp:param name="create" value="${pub.creation}" />             
                               <jsp:param name="msg" value="${pub.message}" />                    
-                              <jsp:param name="img" value="${pub.getCheminImage()}" />
+                              <jsp:param name="img" value="${pub.getCheminImage()}" />          
+                              <jsp:param name="video" value="${pub.getSrcVideo()}" />
                           </jsp:include>
                         </c:forEach>
                        <!--         </div>-->
